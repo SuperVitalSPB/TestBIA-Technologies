@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">test task «BIA-Technologies», LLC</string>
+
+    <string name="navigation_drawer_open">Открыть ящик</string>
+    <string name="navigation_drawer_close">Закрыть ящик</string>
+
+    <string name="nav_all_tracks">Весь список</string>
+    <string name="nav_favorite_tracks">Избранные</string>
+
+    <string name="connection_error">Ошибка соединения</string>
+    <string name="try_again">Повторите снова</string>
+
+    <string name="not_internet">НЕТ интернет соединения!</string>
+    <string name="title_activity_card_track">Карточка трека</string>
+
+    <string name="name_track">Название трека:</string>
+    <string name="name_artist">Артист:</string>
+    <string name="btnOpenOnSite">Открыть на сайте</string>
+
+    <string name="listEmpty">Список избранного пуст</string>
+</resources>
