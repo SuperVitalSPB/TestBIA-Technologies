@@ -10,7 +10,9 @@ import ru.biatech.test.supervital.retrofit.RetrofitSingleton;
  */
 
 public class ApplicationBIATech extends Application {
+
     private TracksDbHelper mDbHelper;
+    public int idxMenuChecked = 0;
 
     public TracksDbHelper getmDbHelper() {
         return mDbHelper;

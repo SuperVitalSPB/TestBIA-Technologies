@@ -11,8 +11,7 @@ public class Const {
                                  rpLIMIT = 50;
 
     public static final String KEY_MODELS = "KEY_MODELS",
-                                KEY_IS_LOADING = "KEY_IS_LOADING",
-                                KEY_MENU_CHECKED = "KEY_MENU_CHECKED";
+                                KEY_IS_LOADING = "KEY_IS_LOADING";
 
     public static final Integer iOn = android.R.drawable.btn_star_big_on,
                                 iOff = android.R.drawable.btn_star_big_off;

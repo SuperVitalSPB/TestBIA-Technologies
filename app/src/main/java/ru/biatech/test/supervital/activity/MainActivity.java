@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import ru.biatech.test.supervital.ApplicationBIATech;
 import ru.biatech.test.supervital.Const;
 import ru.biatech.test.supervital.testbia_tech.R;
 import ru.biatech.test.supervital.fragment.AllTracksFragment;
@@ -25,18 +26,19 @@ public class MainActivity extends AppCompatActivity
 
     NavigationView navigationView;
     DrawerLayout drawer;
-    int mnuIdxChecked = 0;
+    ApplicationBIATech myApp;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(Const.KEY_MENU_CHECKED,
-                navigationView.getMenu().getItem(0).isChecked() ? 0 : 1);
+        myApp.idxMenuChecked = navigationView.getMenu().getItem(0).isChecked() ? 0 : 1;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myApp = (ApplicationBIATech) getApplication();
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,16 +51,6 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        if (savedInstanceState != null)
-            mnuIdxChecked = savedInstanceState.getInt(Const.KEY_MENU_CHECKED);
-
-        if (isOnline()) {
-            RestoreTracksFrame();
-        } else {
-            showStartFrame();
-            EnabledDrawerItems(false);
-        }
     }
 
     private void showStartFrame(){
@@ -121,7 +113,7 @@ public class MainActivity extends AppCompatActivity
         if(fra != null && fra instanceof StartFragment)
             ((StartFragment) fra).txtNotInternet.setText("");
         EnabledDrawerItems(true);
-        onNavigationItemSelected(navigationView.getMenu().getItem(mnuIdxChecked));
+        onNavigationItemSelected(navigationView.getMenu().getItem(myApp.idxMenuChecked));
     }
 
     public boolean isOnline() {
@@ -131,6 +123,18 @@ public class MainActivity extends AppCompatActivity
             return false;
         }
         return cm.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isOnline()) {
+            RestoreTracksFrame();
+        } else {
+            showStartFrame();
+            EnabledDrawerItems(false);
+        }
+
     }
 
 }
