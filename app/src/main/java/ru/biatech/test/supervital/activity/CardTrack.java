@@ -35,6 +35,8 @@ public class CardTrack extends AppCompatActivity {
         TextView name_artist = (TextView) findViewById(R.id.name_artist);
         name_artist.setText(names[1]);
 
+        
+
         Button btnViewOnSite = (Button) findViewById(R.id.btnViewOnSite);
         btnViewOnSite.setEnabled(names[2].length()!=0);
         btnViewOnSite.setOnClickListener(new View.OnClickListener() {
