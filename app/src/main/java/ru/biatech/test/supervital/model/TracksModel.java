@@ -55,6 +55,8 @@ public class TracksModel implements Parcelable {
     }
 
     public List<TrackModel> getTrack() {
+        if (track.size()==0)
+                track.add(TrackModel.getEmptyTrackModel());
         return track;
     }
 
