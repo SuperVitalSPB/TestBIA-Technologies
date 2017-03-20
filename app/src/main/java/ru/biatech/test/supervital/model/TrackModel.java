@@ -132,7 +132,7 @@ public class TrackModel implements Parcelable {
             if (img.getSize()== ImageModel.Size.large)
                 return img.getText();
 
-        return null;
+        return "";
     }
 
     public String getSmallImage(){
@@ -143,7 +143,7 @@ public class TrackModel implements Parcelable {
             if (img.getSize()== ImageModel.Size.small)
                 return img.getText();
 
-        return null;
+        return "";
     }
 
     public String getMediumImage(){
@@ -154,7 +154,7 @@ public class TrackModel implements Parcelable {
             if (img.getSize()== ImageModel.Size.medium)
                 return img.getText();
 
-        return null;
+        return "";
     }
 
 }
