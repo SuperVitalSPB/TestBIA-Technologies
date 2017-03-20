@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import ru.biatech.test.supervital.model.TrackModel;
 import ru.biatech.test.supervital.testbia_tech.R;
 import ru.biatech.test.supervital.model.TopTracksModel;
 import ru.biatech.test.supervital.retrofit.RetrofitSingleton;
@@ -46,6 +47,8 @@ public class AllTracksFragment extends BaseTracksFragment {
                     @Override
                     public void onCompleted() {
                         Log.d(TAG, "onCompleted");
+                        if (models.size()==0)
+                            models.add(TrackModel.getEmptyTrackModel());
                     }
 
                     @Override
