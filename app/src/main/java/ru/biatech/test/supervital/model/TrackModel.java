@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by Vitaly Oantsa on 15.03.2017.
  */
@@ -27,6 +29,9 @@ public class TrackModel implements Parcelable {
     private String url;
     @SerializedName("artist")
     private ArtistModel artist;
+    @SerializedName("image")
+    private List<ImageModel> image;
+
 
     private Integer currentID;
     private String name_artist;
@@ -109,4 +114,47 @@ public class TrackModel implements Parcelable {
     public void setArtist(ArtistModel artist) {
         this.artist = artist;
     }
+
+    public List<ImageModel> getImage() {
+        return image;
+    }
+
+    public Integer getCurrentID() {
+        return currentID;
+    }
+
+
+    public String getLargeImage(){
+        if(image==null || image.size()==0)
+            return "";
+
+        for (ImageModel img : image)
+            if (img.getSize()== ImageModel.Size.large)
+                return img.getText();
+
+        return null;
+    }
+
+    public String getSmallImage(){
+        if(image==null || image.size()==0)
+            return "";
+
+        for (ImageModel img : image)
+            if (img.getSize()== ImageModel.Size.small)
+                return img.getText();
+
+        return null;
+    }
+
+    public String getMediumImage(){
+        if(image==null || image.size()==0)
+            return "";
+
+        for (ImageModel img : image)
+            if (img.getSize()== ImageModel.Size.medium)
+                return img.getText();
+
+        return null;
+    }
+
 }

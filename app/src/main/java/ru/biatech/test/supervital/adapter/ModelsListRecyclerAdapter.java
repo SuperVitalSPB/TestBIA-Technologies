@@ -10,8 +10,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,6 +49,7 @@ public class ModelsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         }
     };
 
+    // для красивого смещения звезды вниз
     View.OnTouchListener mStarOnTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -81,9 +83,10 @@ public class ModelsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         final TrackModel model = models.get(position);
         String name = model.getName(),
                 name_artist = (model.getArtist()==null ? model.getName_artist() : model.getArtist().getName()),
-                url = model.getUrl();
+                url = model.getUrl(),
+                urlImage = model.getLargeImage();
 
-        String[] names = {name, name_artist, url}; // для формы с инфой
+        String[] names = {name, name_artist, url, urlImage}; // для формы с инфой
         if (model.getId()!=null && model.getId()==-1) {
             names = null;
             name = context.getString(R.string.listEmpty);
@@ -97,6 +100,12 @@ public class ModelsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
         ((CardView) holderTrack.name.getParent().getParent().getParent()).setOnClickListener(mViewOnClickListener);
         ((CardView) holderTrack.name.getParent().getParent().getParent()).setTag(names);
+
+        if (urlImage.length()!=0) {
+            Picasso.with(context).load(urlImage).into(holderTrack.image);
+            holderTrack.image.setOnClickListener(mViewOnClickListener);
+            holderTrack.image.setTag(names);
+        }
 
         holderTrack.name.setText(name);
         holderTrack.name.setOnClickListener(mViewOnClickListener);
@@ -140,13 +149,14 @@ public class ModelsListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
     public static class ViewHolderTrack extends RecyclerView.ViewHolder {
         public TextView name, artist_name;
-        public ImageView image_fav_star;
+        public ImageView image_fav_star, image;
 
         public ViewHolderTrack(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.name);
             artist_name = (TextView) v.findViewById(R.id.artist_name);
             image_fav_star = (ImageView) v.findViewById(R.id.image_fav_star);
+            image = (ImageView) v.findViewById(R.id.image);
         }
     }
 
